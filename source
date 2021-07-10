@@ -10,12 +10,8 @@ local Plugin = {
 			["Description"] = "Removes lightning.",
 			["Aliases"] = {},
 			["Function"] = function(args, speaker)
-				if ShadersEnabled == false then
-					game.Lightning:ClearAllChildren()
-					notify("Rump's Private Plugin", "Removed lightning")
-				else
-					notify("Rump's Private Plugin", "Please disable shaders before using this command.")
-				end
+				game.Lightning:ClearAllChildren()
+				notify("Rump's Private Plugin", "Removed lightning")
 			end
 		}
 	}
