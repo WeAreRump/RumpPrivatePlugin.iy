@@ -7,21 +7,16 @@ local Plugin = {
 	["PluginDescription"] = "Fun plugin",
 
 	["Commands"] = {
-		["rppinfo"] = {
-			["ListName"] = "rppinfo",
+		["rpp"] = {
+			["ListName"] = "rppinfo [info/changelog]",
 			["Description"] = "Rump's Private Plugin\nShows info",
 			["Aliases"] = {},
 			["Function"] = function(args, speaker)
-				notify("Rump's Private Plugin", "Version: " .. Version .. "\nMaker: Rump" .. "\nTester: DrPeter")
-			end
-		},
-		
-		["rppchangelog"] = {
-			["ListName"] = "rppchangelog",
-			["Description"] = "Rump's Private Plugin\nShows info",
-			["Aliases"] = {},
-			["Function"] = function(args, speaker)
-				notify("RPP v" .. Version .. "Changelog", "* Release")
+				if args[1] == "info" then
+					notify("Rump's Private Plugin", "Version: " .. Version .. "\nMaker: Rump" .. "\nTester: DrPeter")
+				elseif args[1] == "changelog" then
+					notify("RPP v" .. Version .. "Changelog", "* Release")
+				end
 			end
 		},
 		
@@ -38,7 +33,7 @@ local Plugin = {
 		["nightvision"] = {
 			["ListName"] = "nightvision / nv",
 			["Description"] = "Rump's Private Plugin\nToggles night vision",
-			["Aliases"] = {},
+			["Aliases"] = {"nv"},
 			["Function"] = function(args, speaker)
 				if NightVision == false then
 					local nv = Instance.new("ColorCorrectionEffect", game.Lighting)
@@ -46,12 +41,10 @@ local Plugin = {
 					nv.TintColor = Color3.new(0, 1, 0)
 					
 					NightVision = true
-					notify("Rump's Private Plugin", "Night Vision enabled")
 				else
 					game.Lighting:FindFirstChild("NightVision"):Destroy()
 					
 					NightVision = false
-					notify("Rump's Private Plugin", "Night Vision disabled")
 				end
 			end
 		}
