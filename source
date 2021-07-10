@@ -7,16 +7,21 @@ local Plugin = {
 	["PluginDescription"] = "Fun plugin",
 
 	["Commands"] = {
-		["rpp"] = {
-			["ListName"] = "rpp [info/changelog]",
+		["rppinfo"] = {
+			["ListName"] = "rppinfo",
 			["Description"] = "Rump's Private Plugin\nShows info",
 			["Aliases"] = {},
 			["Function"] = function(args, speaker)
-				if args[1] == "info" then
-					notify("Rump's Private Plugin", "Version: " .. Version .. "\nMaker: Rump" .. "\nTester: DrPeter")
-				elseif args[1] == "changelog" then
-					notify("RPP v" .. Version .. "Changelog", "* Release")
-				end
+				notify("Rump's Private Plugin", "Version: " .. Version .. "\nMaker: Rump" .. "\nTester: DrPeter")
+			end
+		},
+		
+		["rppchangelog"] = {
+			["ListName"] = "rppchangelog",
+			["Description"] = "Rump's Private Plugin\nShows changelog",
+			["Aliases"] = {},
+			["Function"] = function(args, speaker)
+				notify("RPP v" .. Version .. "Changelog", "* Release")
 			end
 		},
 		
