@@ -1,7 +1,7 @@
 local Version = "0.1"
 
 local Plugin = {
-	["PluginName"] = "Rump's Private Plugin " .. Version,
+	["PluginName"] = "Rump's Private Plugin v" .. Version,
 	["PluginDescription"] = "Fun plugin",
 
 	["Commands"] = {
