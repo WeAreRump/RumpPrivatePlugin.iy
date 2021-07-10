@@ -52,3 +52,5 @@ local Plugin = {
 		}
 	}
 }
+
+return Plugin
