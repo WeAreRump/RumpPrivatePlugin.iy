@@ -94,7 +94,7 @@ else
 	TextBox.Font = Enum.Font.SourceSans
 	TextBox.TextSize = 18
 	TextBox.TextWrapped = true
-	TextBox.Text = "You're not whitelisted on Rump's Private Plugin. If you believe this was a mistake, please DM Rump (the maker) or DrPeter (the tester)."
+	TextBox.Text = "You're not whitelisted on Rump's Private Plugin.\n\nIf you believe this was a mistake or you're using an alt account, please contact an RPP staff to get a whitelist to RPP."
 	TextBox.TextColor3 = Color3.new(1, 1, 1)
 	TextBox.TextXAlignment = Enum.TextXAlignment.Left
 	TextBox.TextYAlignment = Enum.TextYAlignment.Top
