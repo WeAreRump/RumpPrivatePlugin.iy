@@ -44,7 +44,7 @@ local Plugin = {
 					
 					ShadersEnabled = true
 					notify("Rump's Private Plugin", "Enabled shaders")
-				else
+				elseif ShadersEnabled == true then
 					game.Lightning["Blur [RPP]"]:Destroy()
 					game.Lightning["DepthOfField [RPP]"]:Destroy()
 					game.Lightning["SunRays [RPP]"]:Destroy()
