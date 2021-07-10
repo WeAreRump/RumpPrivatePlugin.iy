@@ -3,7 +3,8 @@ local ShadersEnabled = false
 
 local Plugin = {
 	["PluginName"] = "Rump's Private Plugin " .. Version,
-	["PluginDescription"] = "",
+	["PluginDescription"] = "Fun plugin",
+
 	["Commands"] = {
 		["removelightning"] = {
 			["ListName"] = "removelightning",
@@ -41,11 +42,14 @@ local Plugin = {
 					sr.Intensity = 0.05
 					sr.Spread = 0.5
 					
+					ShadersEnabled = true
 					notify("Rump's Private Plugin", "Enabled shaders")
 				else
 					game.Lightning["Blur [RPP]"]:Destroy()
 					game.Lightning["DepthOfField [RPP]"]:Destroy()
 					game.Lightning["SunRays [RPP]"]:Destroy()
+
+					ShadersEnabled = false
 					notify("Rump's Private Plugin", "Disabled shaders")
 				end
 			end
