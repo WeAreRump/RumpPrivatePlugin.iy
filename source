@@ -13,7 +13,7 @@ local Plugin = {
 				game.Lightning:ClearAllChildren()
 				notify("Rump's Private Plugin", "Removed lightning")
 			end
-		}
+		},
 	}
 }
 
