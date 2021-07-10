@@ -1,4 +1,4 @@
-local Version = "1.0"
+local Version = "0.1"
 local ShadersEnabled = false
 
 local Plugin = {
