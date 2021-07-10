@@ -1,59 +1,67 @@
-local Version = "0.1-pre"
+local Whitelisted = {"PPaa100080"}
 
-local NightVision = false
+for _, v in pairs(Whitelisted) do
+	if game.Players.LocalPlayer.Name == Whitelisted then
+		local Version = "0.1-pre"
 
-local Plugin = {
-	["PluginName"] = "RPP v" .. Version,
-	["PluginDescription"] = "Rump's Private Plugin",
+		local NightVision = false
 
-	["Commands"] = {
-		["rppinfo"] = {
-			["ListName"] = "rppinfo",
-			["Description"] = "Rump's Private Plugin\nShows info",
-			["Aliases"] = {},
-			["Function"] = function(args, speaker)
-				notify("Rump's Private Plugin", "Version: " .. Version .. "\nMaker: Rump" .. "\nTester: DrPeter")
-			end
-		},
-		
-		["rppchangelog"] = {
-			["ListName"] = "rppchangelog",
-			["Description"] = "Rump's Private Plugin\nShows changelog",
-			["Aliases"] = {},
-			["Function"] = function(args, speaker)
-				notify("RPP v" .. Version .. " Changelog", "* Release")
-			end
-		},
-		
-		["doublespeed"] = {
-			["ListName"] = "doublespeed",
-			["Description"] = "Rump's Private Plugin\nDoubles your speed by 2.",
-			["Aliases"] = {},
-			["Function"] = function(args, speaker)
-				local humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
-				humanoid.WalkSpeed = humanoid.WalkSpeed * 2
-			end
-		},
-		
-		["nightvision"] = {
-			["ListName"] = "nightvision / nv",
-			["Description"] = "Rump's Private Plugin\nToggles night vision",
-			["Aliases"] = {"nv"},
-			["Function"] = function(args, speaker)
-				if NightVision == false then
-					local nv = Instance.new("ColorCorrectionEffect", game.Lighting)
-					nv.Name = "NightVision"
-					nv.TintColor = Color3.new(0, 1, 0)
-					
-					NightVision = true
-				else
-					game.Lighting:FindFirstChild("NightVision"):Destroy()
-					
-					NightVision = false
-				end
-			end
+		local Plugin = {
+			["PluginName"] = "RPP v" .. Version,
+			["PluginDescription"] = "Rump's Private Plugin",
+
+			["Commands"] = {
+				["rppinfo"] = {
+					["ListName"] = "rppinfo",
+					["Description"] = "Rump's Private Plugin\nShows info",
+					["Aliases"] = {},
+					["Function"] = function(args, speaker)
+						notify("Rump's Private Plugin", "Version: " .. Version .. "\nMaker: Rump" .. "\nTester: DrPeter")
+					end
+				},
+
+				["rppchangelog"] = {
+					["ListName"] = "rppchangelog",
+					["Description"] = "Rump's Private Plugin\nShows changelog",
+					["Aliases"] = {},
+					["Function"] = function(args, speaker)
+						notify("RPP v" .. Version .. "Changelog", "* Release")
+					end
+				},
+
+				["doublespeed"] = {
+					["ListName"] = "doublespeed",
+					["Description"] = "Rump's Private Plugin\nDoubles your speed by 2.",
+					["Aliases"] = {},
+					["Function"] = function(args, speaker)
+						local humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+						humanoid.WalkSpeed = humanoid.WalkSpeed * 2
+					end
+				},
+
+				["nightvision"] = {
+					["ListName"] = "nightvision / nv",
+					["Description"] = "Rump's Private Plugin\nToggles night vision",
+					["Aliases"] = {"nv"},
+					["Function"] = function(args, speaker)
+						if NightVision == false then
+							local nv = Instance.new("ColorCorrectionEffect", game.Lighting)
+							nv.Name = "NightVision"
+							nv.TintColor = Color3.new(0, 1, 0)
+
+							NightVision = true
+						else
+							game.Lighting:FindFirstChild("NightVision"):Destroy()
+
+							NightVision = false
+						end
+					end
+				}
+			}
 		}
-	}
-}
 
-return Plugin
+		return Plugin
+	else
+		notify("RPP Error", "You're not whitelisted from RPP. Please contact the RPP maker or the RPP tester if this is a mistake.")
+	end
+end
