@@ -21,7 +21,7 @@ local Plugin = {
 			["Description"] = "Rump's Private Plugin\nShows changelog",
 			["Aliases"] = {},
 			["Function"] = function(args, speaker)
-				notify("RPP v" .. Version .. "Changelog", "* Release")
+				notify("RPP v" .. Version .. " Changelog", "* Release")
 			end
 		},
 		
