@@ -3,8 +3,8 @@ local Version = "0.1-pre"
 local NightVision = false
 
 local Plugin = {
-	["PluginName"] = "Rump's Private Plugin v" .. Version,
-	["PluginDescription"] = "Fun plugin",
+	["PluginName"] = "RPP v" .. Version,
+	["PluginDescription"] = "Rump's Private Plugin",
 
 	["Commands"] = {
 		["rppinfo"] = {
