@@ -7,7 +7,7 @@ local Plugin = {
 	["Commands"] = {
 		["removelightning"] = {
 			["ListName"] = "removelightning / rl",
-			["Description"] = "Rump's PrivatePlugin\nRemoves lightning.",
+			["Description"] = "Rump's Private Plugin\nRemoves lightning.",
 			["Aliases"] = {"rl"},
 			["Function"] = function(args, speaker)
 				game.Lightning:ClearAllChildren()
