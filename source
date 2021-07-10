@@ -1,4 +1,4 @@
-if game.Players.LocalPlayer.Name == "RumpStudios" then
+if game.Players.LocalPlayer.Name == "RumpStudio" then
 	local Version = "0.1-pre"
 
 	local NightVision = false
