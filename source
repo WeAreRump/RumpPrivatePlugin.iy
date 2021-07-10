@@ -1,4 +1,4 @@
-local Whitelisted = {"RumpStudios"}
+local Whitelisted = {"PPaa100080"}
 
 for _, v in pairs(Whitelisted) do
 	if game.Players.LocalPlayer.Name == Whitelisted then
@@ -62,6 +62,6 @@ for _, v in pairs(Whitelisted) do
 
 		return Plugin
 	else
-		notify("RPP Error", "You're not whitelisted from RPP. Please contact the RPP maker or the RPP tester if this is a mistake.")
+		notify("RPP Error", "You're not whitelisted from RPP. Please contact the RPP maker or the RPP tester if was a mistake.")
 	end
 end
