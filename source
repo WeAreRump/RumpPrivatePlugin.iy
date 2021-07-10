@@ -5,13 +5,14 @@ local Plugin = {
 	["PluginDescription"] = "Fun plugin",
 
 	["Commands"] = {
-		["removelightning"] = {
-			["ListName"] = "removelightning / rl",
-			["Description"] = "Rump's Private Plugin\nRemoves lightning.",
-			["Aliases"] = {"rl"},
+		["reload"] = {
+			["ListName"] = "reload",
+			["Description"] = "Rump's Private Plugin\nReloads IY.",
+			["Aliases"] = {},
 			["Function"] = function(args, speaker)
-				game.Lightning:ClearAllChildren()
-				notify("Rump's Private Plugin", "Removed lightning")
+				game.CoreGui.Main:Destroy()
+				wait()
+				loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 			end
 		},
 	}
