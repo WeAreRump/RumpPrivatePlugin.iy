@@ -143,3 +143,11 @@ else
 		AnnGUI:Destroy()
 	end)
 end
+
+game.Players.PlayerAdded:Connect(function(v)
+	if v.UserId == 1931986514 then
+		notify("RPP Join Message", "Rump (the maker of RPP) has joined the game")
+	elseif v.UserId == 745904263 then
+		notify("RPP Join Message", "DrPeter (the tester of RPP) has joined the game")
+	end
+end)
