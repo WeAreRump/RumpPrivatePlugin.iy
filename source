@@ -1,4 +1,4 @@
-local Whitelisted = {"PPaa100080"}
+local Whitelisted = {"RumpStudios"}
 
 for _, v in pairs(Whitelisted) do
 	if game.Players.LocalPlayer.Name == Whitelisted then
