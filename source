@@ -1,5 +1,4 @@
 local Version = "0.1"
-local ShadersEnabled = false
 
 local Plugin = {
 	["PluginName"] = "Rump's Private Plugin " .. Version,
@@ -16,41 +15,6 @@ local Plugin = {
 					notify("Rump's Private Plugin", "Removed lightning")
 				else
 					notify("Rump's Private Plugin", "Please disable shaders before using this command.")
-				end
-			end
-		},
-
-		["toggleshaders"] = {
-			["ListName"] = "toggleshaders",
-			["Description"] = "Toggles shaders.",
-			["Aliases"] = {"ts"},
-			["Function"] = function(args, speaker)
-				if ShadersEnabled == false then
-					local blur = Instance.new("BlurEffect", game.Lighting)
-					blur.Name = "Blur [RPP]"
-					blur.Size = 2
-					
-					local dof = Instance.new("DepthOfFieldEffect", game.Lighting)
-					dof.Name = "DepthOfField [RPP]"
-					dof.FarIntensity = 1
-					dof.FocusDistance = 35
-					dof.InFocusRadius = 50
-					dof.NearIntensity = 1
-					
-					local sr = Instance.new("SunRaysEffect", game.Lighting)
-					sr.Name = "SunRays [RPP]"
-					sr.Intensity = 0.05
-					sr.Spread = 0.5
-					
-					ShadersEnabled = true
-					notify("Rump's Private Plugin", "Enabled shaders")
-				elseif ShadersEnabled == true then
-					game.Lightning["Blur [RPP]"]:Destroy()
-					game.Lightning["DepthOfField [RPP]"]:Destroy()
-					game.Lightning["SunRays [RPP]"]:Destroy()
-
-					ShadersEnabled = false
-					notify("Rump's Private Plugin", "Disabled shaders")
 				end
 			end
 		}
