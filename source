@@ -8,7 +8,7 @@ local Plugin = {
 
 	["Commands"] = {
 		["rpp"] = {
-			["ListName"] = "rppinfo [info/changelog]",
+			["ListName"] = "rpp [info/changelog]",
 			["Description"] = "Rump's Private Plugin\nShows info",
 			["Aliases"] = {},
 			["Function"] = function(args, speaker)
