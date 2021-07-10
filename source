@@ -1,20 +1,51 @@
-local Version = "0.1"
+local Version = "0.1-pre"
+
+local NightVision = false
 
 local Plugin = {
 	["PluginName"] = "Rump's Private Plugin v" .. Version,
 	["PluginDescription"] = "Fun plugin",
 
 	["Commands"] = {
-		["reload"] = {
-			["ListName"] = "reload",
-			["Description"] = "Rump's Private Plugin\nReloads IY.",
+		["rppinfo"] = {
+			["ListName"] = "rppinfo",
+			["Description"] = "Rump's Private Plugin\nShows info",
 			["Aliases"] = {},
 			["Function"] = function(args, speaker)
-				game.CoreGui.Main:Destroy()
-				wait()
-				loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+				notify("Rump's Private Plugin", "Version: " .. Version .. "\nMaker: Rump" .. "\nTester: DrPeter")
 			end
 		},
+		
+		["doublespeed"] = {
+			["ListName"] = "doublespeed",
+			["Description"] = "Rump's Private Plugin\nDoubles your speed by 2.",
+			["Aliases"] = {},
+			["Function"] = function(args, speaker)
+				local humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+				humanoid.WalkSpeed = humanoid.WalkSpeed * 2
+			end
+		},
+		
+		["nightvision"] = {
+			["ListName"] = "nightvision / nv",
+			["Description"] = "Rump's Private Plugin\nToggles night vision",
+			["Aliases"] = {},
+			["Function"] = function(args, speaker)
+				if NightVision == false then
+					local nv = Instance.new("ColorCorrectionEffect", game.Lighting)
+					nv.Name = "NightVision"
+					nv.TintColor = Color3.new(0, 1, 0)
+					
+					NightVision = true
+					notify("Rump's Private Plugin", "Night Vision enabled")
+				else
+					game.Lighting:FindFirstChild("NightVision"):Destroy()
+					
+					NightVision = false
+					notify("Rump's Private Plugin", "Night Vision disabled")
+				end
+			end
+		}
 	}
 }
 
