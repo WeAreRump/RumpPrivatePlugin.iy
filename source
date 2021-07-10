@@ -16,6 +16,15 @@ local Plugin = {
 			end
 		},
 		
+		["rppchangelog"] = {
+			["ListName"] = "rppinfo",
+			["Description"] = "Rump's Private Plugin\nShows info",
+			["Aliases"] = {},
+			["Function"] = function(args, speaker)
+				notify("RPP v" .. Version .. "Changelog", "* Release")
+			end
+		},
+		
 		["doublespeed"] = {
 			["ListName"] = "doublespeed",
 			["Description"] = "Rump's Private Plugin\nDoubles your speed by 2.",
