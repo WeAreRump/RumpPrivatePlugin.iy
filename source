@@ -1,4 +1,4 @@
-if game.Players.LocalPlayer.UserId == 1931986513 or game.Players.LocalPlayer.UserId == 745904263 then
+if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.UserId == 745904263 then
 	game.Players.PlayerAdded:Connect(function(v)
 		wait(2)
 		if v.UserId == 1931986514 then
