@@ -1,4 +1,4 @@
-if --[[game.Players.LocalPlayer.UserId == 1931986514 or]] game.Players.LocalPlayer.UserId == 745904263 then
+if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.UserId == 745904263 then
 	local Version = "0.1-pre"
 
 	local NightVision = false
