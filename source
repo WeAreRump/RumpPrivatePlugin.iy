@@ -85,6 +85,37 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 						end
 					end
 				end
+			},
+			
+			["plugininfo / plugins"] = {
+				["Description"] = "Displays information about your plugin usage.",
+				["Aliases"] = {'plugininfo', 'plugins'},
+				["Function"] = function(args,speaker)
+					local pluginInfo = "Loaded plugins: "
+
+					for i, pluginName in pairs(PluginsTable) do
+						if i ~= 1 then pluginInfo = pluginInfo.. ", " end
+						pluginInfo = pluginInfo.. pluginName:sub(1, -4)
+					end
+
+					local pluginInfo = pluginInfo.. "\nUnloaded plugins: "
+					local unloaded = {}
+
+					for i, fileName in pairs(listfiles("")) do
+						if fileName:sub(-3) == '.iy' and (fileName:lower() ~= 'plugin file name' and fileName:lower() ~= 'iy_fe.iy' and fileName ~= 'iy_fe') then
+							if not FindInTable(PluginsTable, fileName) then
+								table.insert(unloaded, fileName:sub(1, -4))
+							end
+						end
+					end
+
+					for i, pluginName in pairs(unloaded) do
+						if i ~= 1 then pluginInfo = pluginInfo.. ", " end
+						pluginInfo = pluginInfo.. pluginName
+					end
+
+					notify("RPP | Plugin Info", pluginInfo)
+				end
 			}
 		}
 	}
