@@ -1,4 +1,4 @@
-local function run()
+if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.UserId == 745904263 then
 	local Version = "0.0.1"
 
 	local NightVision = false
@@ -58,12 +58,6 @@ local function run()
 	}
 
 	return Plugin
-end
-
-----------------------------------------
-
-if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.UserId == 745904263 then
-	run()
 else
 	local GUI = Instance.new("ScreenGui")
 	local AnnGUI = Instance.new("Frame")
