@@ -2,7 +2,8 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 	local Version = "0.0.1"
 
 	local NightVision = false
-
+	local MouseTargetESP = false
+	
 	local Plugin = {
 		["PluginName"] = "Rump's Private Plugin",
 		["PluginDescription"] = "Rump's Private Plugin",
@@ -53,37 +54,87 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 						NightVision = false
 					end
 				end
+			},
+			
+			["mousetarget"] = {
+				["ListName"] = "mousetarget / mtarget",
+				["Description"] = "Rump's Private Plugin\nToggles showing mouse target",
+				["Aliases"] = {'mousetarget', 'mtarget'},
+				["Function"] = function(args,speaker)
+					MouseTargetESP = not MouseTargetESP
+				end
 			}
 		}
 	}
 	
-	spawn(function()
-		lastchatted = false
-		incmd = false
-		oldexecCmd = execCmd
-		execCmd = function(...)
-			lastchatted = false
-			incmd = true
-			oldexecCmd(...)
-			game:GetService("RunService").RenderStepped:Wait()
-			game:GetService("RunService").Stepped:Wait()
-			incmd = false
+	local ESP = Instance.new("Folder", workspace)
+
+	function createLabel()
+		local parent = IYMouse.Target
+
+		local bb = Instance.new("BillboardGui")
+		bb.Adornee = parent
+		bb.AlwaysOnTop = true
+		bb.Size = UDim2.new(0, 30, 0, 30)
+		bb.Parent = ESP
+
+		local frame = Instance.new("Frame", bb)
+		frame.ZIndex = 10
+		frame.BackgroundTransparency = 1
+		frame.Size = UDim2.new(1, 0, 1, 0)
+
+		local label = Instance.new("TextLabel", frame)
+		label.ZIndex = math.huge
+		label.Text = parent:GetFullName()
+		label.Size = UDim2.new(1, 0, 1, 0)
+		label.BackgroundTransparency = 1
+		label.Font = Enum.Font.SourceSansBold
+		label.TextSize = 30
+		label.TextColor3 = Color3.new(1, 1, 1)
+		label.TextStrokeTransparency = 0
+	end
+
+	function createChams()
+		local parent = IYMouse.Target
+		local parts
+
+		if parent:IsA("Player") then
+			parts = parent:GetChildren()
+		else
+			parts = parent:GetDescendants()
 		end
 
-		oldnotify = notify
-		notify = function(...)
-			local t = {...}
-			if lastchatted then
-				if not (pcall(function() game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest:FireServer(t[1] and t[2] or t[1],"All") end)) then oldnotify(...) end
-			else oldnotify(...) end
-		end
-
-		game:GetService("Players").LocalPlayer.Chatted:Connect(function(cmd)
-			if cmd:lower():sub(0, #prefix) == prefix or cmd:lower():sub(0, #prefix+3) == "/e ".. prefix then
-				repeat game:GetService("RunService").RenderStepped:Wait() until incmd
-				lastchatted = true
+		function GetSizeOfObject(Obj)
+			if Obj.Size then
+				return Obj.Size
+			elseif Obj:IsA("Model") then
+				return Obj:GetExtentsSize()
 			end
-		end)
+		end
+
+		for i, part in pairs(parts) do
+			if part:IsA("PVInstance") and part.Name ~= "HumanoidRootPart" then
+				local Box = Instance.new("BoxHandleAdornment")
+				pcall(function() Box.Size = GetSizeOfObject(part) end)
+				Box.Name = ""
+				Box.Adornee = parent
+				Box.AlwaysOnTop = true
+				Box.Color3 = Color3.new(1, 1, 1)
+				Box.Parent = ESP
+			end
+		end
+	end
+
+	game:GetService("RunService").Heartbeat:Connect(function()
+		if MouseTargetESP then
+			pcall(function()
+				ESP:ClearAllChildren()
+				createLabel()
+				createChams()
+			end)
+		else
+			ESP:ClearAllChildren()
+		end
 	end)
 
 	return Plugin
