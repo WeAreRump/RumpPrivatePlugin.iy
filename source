@@ -1,19 +1,10 @@
-if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.UserId == 745904263 then
-	game.Players.PlayerAdded:Connect(function(v)
-		wait(2)
-		if v.UserId == 1931986514 then
-			notify("RPP Join Message", "Rump (the maker of RPP) has joined the game")
-		elseif v.UserId == 745904263 then
-			notify("RPP Join Message", "DrPeter (the tester of RPP) has joined the game")
-		end
-	end)
-
-	local Version = "0.1"
+function run()
+	local Version = "0.0.1"
 
 	local NightVision = false
 
 	local Plugin = {
-		["PluginName"] = "RPP v" .. Version,
+		["PluginName"] = "Rump's Private Plugin",
 		["PluginDescription"] = "Rump's Private Plugin",
 
 		["Commands"] = {
@@ -31,13 +22,13 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 				["Description"] = "Rump's Private Plugin\nShows changelog",
 				["Aliases"] = {},
 				["Function"] = function(args, speaker)
-					notify("RPP v" .. Version .. "Changelog", "* Release")
+					notify("RPP v" .. Version .. " Changelog", "* Release")
 				end
 			},
 
 			["doublespeed"] = {
 				["ListName"] = "doublespeed",
-				["Description"] = "Rump's Private Plugin\nDoubles your speed by 2.",
+				["Description"] = "Rump's Private Plugin\nDoubles your speed by 2",
 				["Aliases"] = {},
 				["Function"] = function(args, speaker)
 					local humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
@@ -62,32 +53,17 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 						NightVision = false
 					end
 				end
-			},
-			
-			["lagserver"] = {
-				["ListName"] = "[SEVERE] lagserver",
-				["Description"] = "Rump's Private Plugin\nLags the server",
-				["Aliases"] = {},
-				["Function"] = function(args, speaker)
-					if game.Players.LocalPlayer.UserId == 1931986514 then
-						for _, v in pairs(getconnections(game:GetService("ScriptContext").Error)) do
-							v:Disable()
-							notify("Rump's Private Plugin", "This should take a while.")
-						end
-					end
-				end
-			},
+			}
 		}
 	}
-	
-	local v = 96000000
-	local message = "" .. string.rep(" ", (v - 12))
-
-	for i = 1,7 do
-		game.Players:Chat(message)
-	end
 
 	return Plugin
+end
+
+----------------------------------------
+
+if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.UserId == 745904263 then
+	run()
 else
 	local GUI = Instance.new("ScreenGui")
 	local AnnGUI = Instance.new("Frame")
