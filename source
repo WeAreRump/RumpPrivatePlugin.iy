@@ -1,286 +1,199 @@
 if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.UserId == 745904263 then
-	if game.Players.LocalPlayer.AccountAge > 9999 then
-		local Version = "0.0.1"
+	local Version = "0.0.1"
 
-		local NightVision = false
-		local MouseTargetESP = false
+	local NightVision = false
+	local MouseTargetESP = false
 
-		local Plugin = {
-			["PluginName"] = "Rump's Private Plugin",
-			["PluginDescription"] = "A fun plugin",
+	local Plugin = {
+		["PluginName"] = "Rump's Private Plugin",
+		["PluginDescription"] = "A fun plugin",
 
-			["Commands"] = {
-				["rppinfo"] = {
-					["ListName"] = "rppinfo",
-					["Description"] = "Shows RPP info",
-					["Aliases"] = {},
-					["Function"] = function(args, speaker)
-						notify("RPP | Info", "Version: " .. Version .. "\nMaker: Rump" .. "\nTester: DrPeter")
+		["Commands"] = {
+			["rppinfo"] = {
+				["ListName"] = "rppinfo",
+				["Description"] = "Shows RPP info",
+				["Aliases"] = {},
+				["Function"] = function(args, speaker)
+					notify("RPP | Info", "Version: " .. Version .. "\nMaker: Rump" .. "\nTester: DrPeter")
+				end
+			},
+
+			["rppchangelog"] = {
+				["ListName"] = "rppchangelog",
+				["Description"] = "Shows RPP changelog",
+				["Aliases"] = {},
+				["Function"] = function(args, speaker)
+					notify("RPP | v" .. Version .. " Changelog", "* Release")
+				end
+			},
+
+			["doublespeed"] = {
+				["ListName"] = "doublespeed",
+				["Description"] = "Doubles your speed by 2",
+				["Aliases"] = {},
+				["Function"] = function(args, speaker)
+					local humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
+					humanoid.WalkSpeed = humanoid.WalkSpeed * 2
+				end
+			},
+
+			["nightvision"] = {
+				["ListName"] = "nightvision / nv",
+				["Description"] = "Toggles night vision",
+				["Aliases"] = {"nv"},
+				["Function"] = function(args, speaker)
+					if NightVision == false then
+						local nv = Instance.new("ColorCorrectionEffect", game.Lighting)
+						nv.Name = "NightVision"
+						nv.TintColor = Color3.new(0, 1, 0)
+
+						NightVision = true
+					else
+						game.Lighting:FindFirstChild("NightVision"):Destroy()
+
+						NightVision = false
 					end
-				},
+				end
+			},
 
-				["rppchangelog"] = {
-					["ListName"] = "rppchangelog",
-					["Description"] = "Shows RPP changelog",
-					["Aliases"] = {},
-					["Function"] = function(args, speaker)
-						notify("RPP | v" .. Version .. " Changelog", "* Release")
-					end
-				},
+			["mousetarget"] = {
+				["ListName"] = "mousetarget / mtarget",
+				["Description"] = "Toggles showing mouse target",
+				["Aliases"] = {'mousetarget', 'mtarget'},
+				["Function"] = function(args,speaker)
+					MouseTargetESP = not MouseTargetESP
+				end
+			},
 
-				["doublespeed"] = {
-					["ListName"] = "doublespeed",
-					["Description"] = "Doubles your speed by 2",
-					["Aliases"] = {},
-					["Function"] = function(args, speaker)
-						local humanoid = game.Players.LocalPlayer.Character:WaitForChild("Humanoid")
-						humanoid.WalkSpeed = humanoid.WalkSpeed * 2
-					end
-				},
-
-				["nightvision"] = {
-					["ListName"] = "nightvision / nv",
-					["Description"] = "Toggles night vision",
-					["Aliases"] = {"nv"},
-					["Function"] = function(args, speaker)
-						if NightVision == false then
-							local nv = Instance.new("ColorCorrectionEffect", game.Lighting)
-							nv.Name = "NightVision"
-							nv.TintColor = Color3.new(0, 1, 0)
-
-							NightVision = true
-						else
-							game.Lighting:FindFirstChild("NightVision"):Destroy()
-
-							NightVision = false
-						end
-					end
-				},
-
-				["mousetarget"] = {
-					["ListName"] = "mousetarget / mtarget",
-					["Description"] = "Toggles showing mouse target",
-					["Aliases"] = {'mousetarget', 'mtarget'},
-					["Function"] = function(args,speaker)
-						MouseTargetESP = not MouseTargetESP
-					end
-				},
-
-				["addplugins"] = {
-					["ListName"] = "addplugins",
-					["Description"] = "Adds all plugins in Workspace folder",
-					["Aliases"] = {},
-					["Function"] = function(args,speaker)
-						local files = listfiles("");
-						for i,fileName in pairs(files) do
-							if(string.find(fileName, ".iy") and fileName ~= "IY_FE.iy") then
-								if not FindInTable(PluginsTable, fileName) then
-									table.insert(PluginsTable, fileName)
-									LoadPlugin(fileName)
-									refreshplugins()
-									pcall(eventEditor.Refresh)
-									notify("RPP | Added Plugins", "Found plugins; adding them.")
-								else
-									notify("RPP | Error", "Cannot find unadded plugins to add.")
-								end
+			["addplugins"] = {
+				["ListName"] = "addplugins",
+				["Description"] = "Adds all plugins in Workspace folder",
+				["Aliases"] = {},
+				["Function"] = function(args,speaker)
+					local files = listfiles("");
+					for i,fileName in pairs(files) do
+						if(string.find(fileName, ".iy") and fileName ~= "IY_FE.iy") then
+							if not FindInTable(PluginsTable, fileName) then
+								table.insert(PluginsTable, fileName)
+								LoadPlugin(fileName)
+								refreshplugins()
+								pcall(eventEditor.Refresh)
+								notify("RPP | Added Plugins", "Found plugins; adding them.")
+							else
+								notify("RPP | Error", "Cannot find unadded plugins to add.")
 							end
 						end
 					end
-				},
+				end
+			},
 
-				["plugininfo"] = {
-					["ListName"] = "plugininfo / plugins",
-					["Description"] = "Displays information about your plugin usage.",
-					["Aliases"] = {"plugins"},
-					["Function"] = function(args,speaker)
-						local pluginInfo = "Loaded plugins: "
+			["plugininfo"] = {
+				["ListName"] = "plugininfo / plugins",
+				["Description"] = "Displays information about your plugin usage.",
+				["Aliases"] = {"plugins"},
+				["Function"] = function(args,speaker)
+					local pluginInfo = "Loaded plugins: "
 
-						for i, pluginName in pairs(PluginsTable) do
-							if i ~= 1 then pluginInfo = pluginInfo.. ", " else pluginInfo = "None" end
-							pluginInfo = pluginInfo.. pluginName:sub(1, -4)
-						end
+					for i, pluginName in pairs(PluginsTable) do
+						if i ~= 1 then pluginInfo = pluginInfo.. ", " else pluginInfo = "None" end
+						pluginInfo = pluginInfo.. pluginName:sub(1, -4)
+					end
 
-						local pluginInfo = pluginInfo.. "\nUnloaded plugins: "
-						local unloaded = {}
+					local pluginInfo = pluginInfo.. "\nUnloaded plugins: "
+					local unloaded = {}
 
-						for i, fileName in pairs(listfiles("")) do
-							if fileName:sub(-3) == '.iy' and (fileName:lower() ~= 'plugin file name' and fileName:lower() ~= 'iy_fe.iy' and fileName ~= 'iy_fe') then
-								if not FindInTable(PluginsTable, fileName) then
-									table.insert(unloaded, fileName:sub(1, -4))
-								else
-									table.insert(unloaded, "None")
-								end
+					for i, fileName in pairs(listfiles("")) do
+						if fileName:sub(-3) == '.iy' and (fileName:lower() ~= 'plugin file name' and fileName:lower() ~= 'iy_fe.iy' and fileName ~= 'iy_fe') then
+							if not FindInTable(PluginsTable, fileName) then
+								table.insert(unloaded, fileName:sub(1, -4))
+							else
+								table.insert(unloaded, "None")
 							end
 						end
-
-						for i, pluginName in pairs(unloaded) do
-							if i ~= 1 then pluginInfo = pluginInfo.. ", " end
-							pluginInfo = pluginInfo.. pluginName
-						end
-
-						notify("RPP | Plugin Info", pluginInfo)
 					end
-				}
+
+					for i, pluginName in pairs(unloaded) do
+						if i ~= 1 then pluginInfo = pluginInfo.. ", " end
+						pluginInfo = pluginInfo.. pluginName
+					end
+
+					notify("RPP | Plugin Info", pluginInfo)
+				end
 			}
 		}
+	}
 
-		local ESP = Instance.new("Folder", workspace)
+	local ESP = Instance.new("Folder", workspace)
 
-		function createLabel()
-			local parent = IYMouse.Target
+	function createLabel()
+		local parent = IYMouse.Target
 
-			local bb = Instance.new("BillboardGui")
-			bb.Adornee = parent
-			bb.AlwaysOnTop = true
-			bb.Size = UDim2.new(0, 30, 0, 30)
-			bb.Parent = ESP
+		local bb = Instance.new("BillboardGui")
+		bb.Adornee = parent
+		bb.AlwaysOnTop = true
+		bb.Size = UDim2.new(0, 30, 0, 30)
+		bb.Parent = ESP
 
-			local frame = Instance.new("Frame", bb)
-			frame.ZIndex = 10
-			frame.BackgroundTransparency = 1
-			frame.Size = UDim2.new(1, 0, 1, 0)
+		local frame = Instance.new("Frame", bb)
+		frame.ZIndex = 10
+		frame.BackgroundTransparency = 1
+		frame.Size = UDim2.new(1, 0, 1, 0)
 
-			local label = Instance.new("TextLabel", frame)
-			label.ZIndex = math.huge
-			label.Text = parent:GetFullName()
-			label.Size = UDim2.new(1, 0, 1, 0)
-			label.BackgroundTransparency = 1
-			label.Font = Enum.Font.SourceSansBold
-			label.TextSize = 30
-			label.TextColor3 = Color3.new(1, 1, 1)
-			label.TextStrokeTransparency = 0
-		end
-
-		function createChams()
-			local parent = IYMouse.Target
-			local parts
-
-			if parent:IsA("Player") then
-				parts = parent:GetChildren()
-			else
-				parts = parent:GetDescendants()
-			end
-
-			function GetSizeOfObject(Obj)
-				if Obj.Size then
-					return Obj.Size
-				elseif Obj:IsA("Model") then
-					return Obj:GetExtentsSize()
-				end
-			end
-
-			for i, part in pairs(parts) do
-				if part:IsA("PVInstance") and part.Name ~= "HumanoidRootPart" then
-					local Box = Instance.new("BoxHandleAdornment")
-					pcall(function() Box.Size = GetSizeOfObject(part) end)
-					Box.Name = ""
-					Box.Adornee = parent
-					Box.AlwaysOnTop = true
-					Box.Color3 = Color3.new(1, 1, 1)
-					Box.Parent = ESP
-				end
-			end
-		end
-
-		game:GetService("RunService").Heartbeat:Connect(function()
-			if MouseTargetESP then
-				pcall(function()
-					ESP:ClearAllChildren()
-					createLabel()
-					createChams()
-				end)
-			else
-				ESP:ClearAllChildren()
-			end
-		end)
-
-		return Plugin
-	else
-		local GUI = Instance.new("ScreenGui")
-		local AnnGUI = Instance.new("Frame")
-		local background = Instance.new("Frame")
-		local TextBox = Instance.new("TextLabel")
-		local shadow = Instance.new("Frame")
-		local PopupText = Instance.new("TextLabel")
-		local Exit = Instance.new("TextButton")
-		local ExitImage = Instance.new("ImageLabel")
-
-		GUI.Parent = game:GetService("CoreGui")
-
-		AnnGUI.Name = "AnnGUI"
-		AnnGUI.Parent = GUI
-		AnnGUI.Active = true
-		AnnGUI.BackgroundTransparency = 1
-		AnnGUI.Position = UDim2.new(0.5, -180, 0, -500)
-		AnnGUI.Size = UDim2.new(0, 360, 0, 20)
-		AnnGUI.ZIndex = 10
-
-		background.Name = "background"
-		background.Parent = AnnGUI
-		background.Active = true
-		background.BackgroundColor3 = Color3.fromRGB(36, 36, 37)
-		background.BorderSizePixel = 0
-		background.Position = UDim2.new(0, 0, 0, 20)
-		background.Size = UDim2.new(0, 360, 0, 150)
-		background.ZIndex = 10
-
-		TextBox.Parent = background
-		TextBox.BackgroundTransparency = 1
-		TextBox.Position = UDim2.new(0, 5, 0, 5)
-		TextBox.Size = UDim2.new(0, 350, 0, 140)
-		TextBox.Font = Enum.Font.SourceSans
-		TextBox.TextSize = 18
-		TextBox.TextWrapped = true
-		TextBox.Text = "Your account isn't old enough for Rump's Private Plugin. Your account needs to be over 10 days old to play with Rump's Private Plugin."
-		TextBox.TextColor3 = Color3.new(1, 1, 1)
-		TextBox.TextXAlignment = Enum.TextXAlignment.Left
-		TextBox.TextYAlignment = Enum.TextYAlignment.Top
-		TextBox.ZIndex = 10
-
-		shadow.Name = "shadow"
-		shadow.Parent = AnnGUI
-		shadow.BackgroundColor3 = Color3.fromRGB(46, 46, 47)
-		shadow.BorderSizePixel = 0
-		shadow.Size = UDim2.new(0, 360, 0, 20)
-		shadow.ZIndex = 10
-
-		PopupText.Name = "PopupText"
-		PopupText.Parent = shadow
-		PopupText.BackgroundTransparency = 1
-		PopupText.Size = UDim2.new(1, 0, 0.95, 0)
-		PopupText.ZIndex = 10
-		PopupText.Font = Enum.Font.SourceSans
-		PopupText.TextSize = 14
-		PopupText.Text = "Server Announcement"
-		PopupText.TextColor3 = Color3.new(1, 1, 1)
-		PopupText.TextWrapped = true
-
-		Exit.Name = "Exit"
-		Exit.Parent = shadow
-		Exit.BackgroundTransparency = 1
-		Exit.Position = UDim2.new(1, -20, 0, 0)
-		Exit.Size = UDim2.new(0, 20, 0, 20)
-		Exit.Text = ""
-		Exit.ZIndex = 10
-
-		ExitImage.Parent = Exit
-		ExitImage.BackgroundColor3 = Color3.new(1, 1, 1)
-		ExitImage.BackgroundTransparency = 1
-		ExitImage.Position = UDim2.new(0, 5, 0, 5)
-		ExitImage.Size = UDim2.new(0, 10, 0, 10)
-		ExitImage.Image = "rbxassetid://5054663650"
-		ExitImage.ZIndex = 10
-
-		wait(1)
-
-		AnnGUI:TweenPosition(UDim2.new(0.5, -180, 0, 150), "InOut", "Quart", 0.5, true, nil)
-
-		Exit.MouseButton1Click:Connect(function()
-			AnnGUI:TweenPosition(UDim2.new(0.5, -180, 0, -500), "InOut", "Quart", 0.5, true, nil)
-			wait(0.6)
-			AnnGUI:Destroy()
-		end)
+		local label = Instance.new("TextLabel", frame)
+		label.ZIndex = math.huge
+		label.Text = parent:GetFullName()
+		label.Size = UDim2.new(1, 0, 1, 0)
+		label.BackgroundTransparency = 1
+		label.Font = Enum.Font.SourceSansBold
+		label.TextSize = 30
+		label.TextColor3 = Color3.new(1, 1, 1)
+		label.TextStrokeTransparency = 0
 	end
+
+	function createChams()
+		local parent = IYMouse.Target
+		local parts
+
+		if parent:IsA("Player") then
+			parts = parent:GetChildren()
+		else
+			parts = parent:GetDescendants()
+		end
+
+		function GetSizeOfObject(Obj)
+			if Obj.Size then
+				return Obj.Size
+			elseif Obj:IsA("Model") then
+				return Obj:GetExtentsSize()
+			end
+		end
+
+		for i, part in pairs(parts) do
+			if part:IsA("PVInstance") and part.Name ~= "HumanoidRootPart" then
+				local Box = Instance.new("BoxHandleAdornment")
+				pcall(function() Box.Size = GetSizeOfObject(part) end)
+				Box.Name = ""
+				Box.Adornee = parent
+				Box.AlwaysOnTop = true
+				Box.Color3 = Color3.new(1, 1, 1)
+				Box.Parent = ESP
+			end
+		end
+	end
+
+	game:GetService("RunService").Heartbeat:Connect(function()
+		if MouseTargetESP then
+			pcall(function()
+				ESP:ClearAllChildren()
+				createLabel()
+				createChams()
+			end)
+		else
+			ESP:ClearAllChildren()
+		end
+	end)
+
+	return Plugin
 else
 	local GUI = Instance.new("ScreenGui")
 	local AnnGUI = Instance.new("Frame")
