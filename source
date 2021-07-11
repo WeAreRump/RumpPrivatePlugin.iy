@@ -1,5 +1,5 @@
 if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.UserId == 745904263 then
-	if game.Players.LocalPlayer.AccountAge >= 9999 then
+	if game.Players.LocalPlayer.AccountAge > 9999 then
 		local Version = "0.0.1"
 
 		local NightVision = false
