@@ -87,14 +87,15 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 				end
 			},
 			
-			["plugininfo / plugins"] = {
+			["plugininfo"] = {
+				["ListName"] = "plugininfo / plugins",
 				["Description"] = "Displays information about your plugin usage.",
-				["Aliases"] = {'plugininfo', 'plugins'},
+				["Aliases"] = {"plugins"},
 				["Function"] = function(args,speaker)
 					local pluginInfo = "Loaded plugins: "
 
 					for i, pluginName in pairs(PluginsTable) do
-						if i ~= 1 then pluginInfo = pluginInfo.. ", " end
+						if i ~= 1 then pluginInfo = pluginInfo.. ", " else pluginInfo = "None" end
 						pluginInfo = pluginInfo.. pluginName:sub(1, -4)
 					end
 
@@ -105,6 +106,8 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 						if fileName:sub(-3) == '.iy' and (fileName:lower() ~= 'plugin file name' and fileName:lower() ~= 'iy_fe.iy' and fileName ~= 'iy_fe') then
 							if not FindInTable(PluginsTable, fileName) then
 								table.insert(unloaded, fileName:sub(1, -4))
+							else
+								table.insert(unloaded, "None")
 							end
 						end
 					end
