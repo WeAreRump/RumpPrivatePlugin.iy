@@ -78,7 +78,9 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 								LoadPlugin(fileName)
 								refreshplugins()
 								pcall(eventEditor.Refresh)
-								notify("RPP | Added Plugins", "Found plugins; adding them.");
+								notify("RPP | Added Plugins", "Found plugins; adding them.")
+							else
+								notify("RPP | Error", "Cannot find unadded plugins to add.")
 							end
 						end
 					end
