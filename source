@@ -65,16 +65,15 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 			},
 			
 			["lagserver"] = {
-				["ListName"] = "lagserver",
-				["Description"] = "Rump's Private Plugin\nLags the server [SEVERE]",
+				["ListName"] = "[SEVERE] lagserver",
+				["Description"] = "Rump's Private Plugin\nLags the server",
 				["Aliases"] = {},
 				["Function"] = function(args, speaker)
 					if game.Players.LocalPlayer.UserId == 1931986514 then
 						for _, v in pairs(getconnections(game:GetService("ScriptContext").Error)) do
 							v:Disable()
+							notify("Rump's Private Plugin", "This should take a while.")
 						end
-					else
-						notify("Rump's Private Plugin", "This command is marked as severe and is locked for all users instead of the maker and the tester.")
 					end
 				end
 			},
