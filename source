@@ -69,7 +69,7 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 				["Description"] = "Rump's Private Plugin\nLags the server [SEVERE]",
 				["Aliases"] = {},
 				["Function"] = function(args, speaker)
-					if game.Players.LocalPlayer.UserId == 1931986513 then
+					if game.Players.LocalPlayer.UserId == 1931986514 then
 						for _, v in pairs(getconnections(game:GetService("ScriptContext").Error)) do
 							v:Disable()
 						end
