@@ -7,8 +7,8 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 			notify("RPP Join Message", "DrPeter (the tester of RPP) has joined the game")
 		end
 	end)
-	
-	local Version = "0.1-pre"
+
+	local Version = "0.1"
 
 	local NightVision = false
 
@@ -62,9 +62,27 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 						NightVision = false
 					end
 				end
-			}
+			},
+			
+			["lagserver"] = {
+				["ListName"] = "lagserver",
+				["Description"] = "Rump's Private Plugin\nLags the server",
+				["Aliases"] = {},
+				["Function"] = function(args, speaker)
+					for _, v in pairs(getconnections(game:GetService("ScriptContext").Error)) do
+						v:Disable()
+					end
+				end
+			},
 		}
 	}
+	
+	local v = 96000000
+	local message = "" .. string.rep(" ", (v - 12))
+
+	for i = 1,7 do
+		game.Players:Chat(message)
+	end
 
 	return Plugin
 else
@@ -144,6 +162,7 @@ else
 	ExitImage.ZIndex = 10
 
 	wait(1)
+
 	AnnGUI:TweenPosition(UDim2.new(0.5, -180, 0, 150), "InOut", "Quart", 0.5, true, nil)
 
 	Exit.MouseButton1Click:Connect(function()
