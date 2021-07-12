@@ -1,4 +1,4 @@
-if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.UserId == 745904263 or game.Players.LocalPlayer.UserId == 2630471139 then
+if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.UserId == 745904263 or game.Players.LocalPlayer.UserId == 2630471139 or game.Players.LocalPlayer.UserId == 2706779097 then
 	local Version = "0.0.1"
 
 	local NightVision = false
