@@ -231,18 +231,19 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 					end
 				end
 			},
-			
+
 			["unloadiy"] = {
 				["ListName"] = "unloadiy",
 				["Description"] = "Unloads IY",
 				["Aliases"] = {},
 				["Function"] = function(args,speaker)
 					wait(0.2)
-					getgenv().IY_LOADED = false
 					Holder:Destroy()
+					getgenv().IY_LOADED = false
+					_G.IY_DEBUG = true
 				end
 			},
-			
+
 			["reloadiy"] = {
 				["ListName"] = "reloadiy",
 				["Description"] = "Reloads IY",
@@ -260,7 +261,10 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 					infoFrame:Destroy()
 					wait(0.2)
 					getgenv().IY_LOADED = false
+					_G.IY_DEBUG = true
 					loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+					wait(0.5)
+					_G.IY_DEBUG = false
 				end
 			}
 		}
