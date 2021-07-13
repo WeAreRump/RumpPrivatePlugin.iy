@@ -1,4 +1,4 @@
-if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.UserId == 745904263 or game.Players.LocalPlayer.UserId == 2630471139 or game.Players.LocalPlayer.UserId == 2706779097 then
+if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.UserId == 745904263 or game.Players.LocalPlayer.UserId == 2630471139 then
 	local Version = "0.0.1"
 
 	local NightVision = false
@@ -229,6 +229,38 @@ if game.Players.LocalPlayer.UserId == 1931986514 or game.Players.LocalPlayer.Use
 					else
 						notify("RPP | Error", "This command only works on Brookhaven")
 					end
+				end
+			},
+			
+			["unloadiy"] = {
+				["ListName"] = "unloadiy",
+				["Description"] = "Unloads IY",
+				["Aliases"] = {},
+				["Function"] = function(args,speaker)
+					wait(0.2)
+					getgenv().IY_LOADED = false
+					Holder:Destroy()
+				end
+			},
+			
+			["reloadiy"] = {
+				["ListName"] = "reloadiy",
+				["Description"] = "Reloads IY",
+				["Aliases"] = {},
+				["Function"] = function(args,speaker)
+					wait(0.2)
+					Holder:Destroy()
+					Title_2:Destroy()
+					Tooltip:Destroy()
+					Notification:Destroy()
+					KeybindEditor:Destroy()
+					PluginEditor:Destroy()
+					ToPartFrame:Destroy()
+					logs:Destroy()
+					infoFrame:Destroy()
+					wait(0.2)
+					getgenv().IY_LOADED = false
+					loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
 				end
 			}
 		}
